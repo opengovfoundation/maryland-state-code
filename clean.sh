@@ -1,16 +1,20 @@
 #!/bin/sh
+mkdir -p stripped
 for file in `ls *.xml`; do
 	php ./convert.php $file
 done
 
+mkdir -p formatted
 for file in `ls stripped`; do
 	xmllint -format "stripped/$file" -output "formatted/$file"
 done
 
+mkdir -p clean
 for file in `ls formatted`; do
 	sed '/^<!DOCTYPE.*$/d' "formatted/$file" > "clean/$file"
 done
 
+mkdir -p final
 for file in `ls clean`; do
 	art=`echo $file | sed 's/\..*//'`
 	sed "s/<article id=".*">/<article id=\"$art\">/" "clean/$file" > "final/$file"
