@@ -17,7 +17,7 @@ done
 mkdir -p final
 for file in `ls clean`; do
 	art=`echo $file | sed 's/\..*//'`
-	sed "s/<article id=".*">/<article id=\"$art\">/" "clean/$file" > "final/$file"
+	sed -E "s/<article id=\"([^\"]+)\"(\/)?>/<article id=\"$art\"\2>/" "clean/$file" > "final/$file"
 	sed -i.bak 's/&#x2013;/-/g' "final/$file"
 	sed -i.bak 's/&#x2014;/-/g' "final/$file"
 	sed -i.bak 's/&#x201C;/"/g' "final/$file"
