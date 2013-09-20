@@ -1,5 +1,5 @@
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-	
+
 	<xsl:output indent="yes"/>
 	<xsl:strip-space elements="*"/>
 
@@ -8,28 +8,29 @@
 		</xsl:template>	 -->
 
 	<xsl:template match="article/section">
+		<xsl:variable name="sectionNumber" select="replace(enum, '\.$', '')"/>
 
-		<xsl:variable name="href"> 
+		<xsl:variable name="href">
 			<xsl:choose>
-				<xsl:when test="preceding-sibling::section/enum = current()/enum">translated/<xsl:value-of select="ancestor::article/@id" />-<xsl:value-of select="enum/text()" />(<xsl:number />).xml</xsl:when>
-				<xsl:otherwise>translated/<xsl:value-of select="ancestor::article/@id" />-<xsl:value-of select="enum/text()" />.xml</xsl:otherwise>
+				<xsl:when test="preceding-sibling::section/enum = current()/enum">5_translated/<xsl:value-of select="ancestor::article/@id" />-<xsl:value-of select="$sectionNumber" />(<xsl:number />).xml</xsl:when>
+				<xsl:otherwise>5_translated/<xsl:value-of select="ancestor::article/@id" />-<xsl:value-of select="$sectionNumber" />.xml</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
-			
+
 		<xsl:result-document href="{$href}">
 			<law>
 				<structure>
-					<unit label="title" identifier="{ancestor::article/@id}" 
+					<unit label="title" identifier="{concat(ancestor::article/@id, '-', $sectionNumber)}"
 						order_by="{ancestor::article/@id}" level="1">
 						<xsl:value-of select="ancestor::article/@id"/>
 					</unit>
 				</structure>
 				<section_number>
-					<xsl:value-of select="enum" />
+					<xsl:value-of select="$sectionNumber" />
 				</section_number>
 				<catch_line></catch_line>
 				<order_by>
-					<xsl:value-of select="enum" />
+					<xsl:value-of select="$sectionNumber" />
 				</order_by>
 				<!-- TODO: need to nest indented paragraphs -->
 				<text>
@@ -70,5 +71,5 @@
 			</law>
 		</xsl:result-document>
 	</xsl:template>
-	
+
 </xsl:stylesheet>

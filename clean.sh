@@ -1,23 +1,23 @@
 #!/bin/sh
-mkdir -p stripped
+mkdir -p 1_stripped
 for file in `ls *.xml`; do
 	php ./convert.php $file
 done
 
-mkdir -p formatted
-for file in `ls stripped`; do
-	xmllint -format "stripped/$file" -output "formatted/$file"
+mkdir -p 2_formatted
+for file in `ls 1_stripped`; do
+	xmllint -format "1_stripped/$file" -output "2_formatted/$file"
 done
 
-mkdir -p clean
-for file in `ls formatted`; do
-	sed '/^<!DOCTYPE.*$/d' "formatted/$file" > "clean/$file"
+mkdir -p 3_clean
+for file in `ls 2_formatted`; do
+	sed '/^<!DOCTYPE.*$/d' "2_formatted/$file" > "3_clean/$file"
 done
 
-mkdir -p final
+mkdir -p 4_cleaner
 for file in `ls clean`; do
 	art=`echo $file | sed 's/\..*//'`
-	sed -E "s/<article id=\"([^\"]+)\"(\/)?>/<article id=\"$art\"\2>/" "clean/$file" > "final/$file"
+	sed -E "s/<article id=\"([^\"]+)\"(\/)?>/<article id=\"$art\"\2>/" "3_clean/$file" > "4_cleaner/$file"
 	sed -i.bak 's/&#x2013;/-/g' "final/$file"
 	sed -i.bak 's/&#x2014;/-/g' "final/$file"
 	sed -i.bak 's/&#x201C;/"/g' "final/$file"

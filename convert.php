@@ -19,4 +19,4 @@ $xml = htmlspecialchars_decode($xml, ENT_HTML5);
 $xml = str_replace($unconvertedEntity, $convertedChar, $xml);
 $xml = str_replace('&', '&amp;', $xml);
 
-file_put_contents('stripped/'.$filename, $xml);
+file_put_contents('1_stripped/'.$filename, $xml);
