@@ -20,13 +20,13 @@
 		<xsl:result-document href="{$href}">
 			<law>
 				<structure>
-					<unit label="title" identifier="{concat(ancestor::article/@id, '-', $sectionNumber)}"
+					<unit label="title" identifier="{ancestor::article/@id}"
 						order_by="{ancestor::article/@id}" level="1">
 						<xsl:value-of select="ancestor::article/@id"/>
 					</unit>
 				</structure>
 				<section_number>
-					<xsl:value-of select="$sectionNumber" />
+					<xsl:value-of select="concat(ancestor::article/@id, '-', $sectionNumber)" />
 				</section_number>
 				<catch_line></catch_line>
 				<order_by>
