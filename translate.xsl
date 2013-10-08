@@ -20,7 +20,7 @@
 		<xsl:result-document href="{$href}">
 			<law>
 				<structure>
-					<unit label="title" identifier="{ancestor::article/@id}"
+					<unit label="article" identifier="{ancestor::article/@id}"
 						order_by="{ancestor::article/@id}" level="1">
 						<xsl:value-of select="ancestor::article/@id"/>
 					</unit>
