@@ -34,38 +34,8 @@
 				</order_by>
 				<!-- TODO: need to nest indented paragraphs -->
 				<text>
-					<xsl:value-of select="text" />
-					<!-- Begin heirarchy -->
-					<!-- Subsection -->
-					<xsl:for-each select="subsection">
-						<section prefix="{current()/enum}">
-							<xsl:value-of select="current()/text" />
-							<!-- Paragraph -->
-							<xsl:for-each select="current()/paragraph">
-								<section prefix="{current()/enum}">
-									<xsl:value-of select="current()/text" />
-									<!-- Subparagraph -->
-									<xsl:for-each select="current()/subparagraph">
-										<section prefix="{current()/enum}">
-											<xsl:value-of select="current()/text" />
-											<!-- Sub-Subparagraph -->
-											<xsl:for-each select="current()/sub-subparagraph">
-												<section prefix="{current()/enum}">
-													<xsl:value-of select="current()/text" />
-													<!-- Sub-Sub-Subparagraph -->
-													<xsl:for-each select="current()/sub-sub-subparagraph">
-														<section prefix="{current()/enum}">
-															<xsl:value-of select="current()/text" />
-														</section>
-													</xsl:for-each>
-												</section>
-											</xsl:for-each>
-										</section>
-									</xsl:for-each>
-								</section>
-							</xsl:for-each>
-						</section>
-					</xsl:for-each>
+					<xsl:copy-of select="current()/text" />
+					<!-- Just get the text in there. -->
 				</text>
 				<!-- TODO add history / metadata -->
 			</law>

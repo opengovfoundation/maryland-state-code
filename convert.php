@@ -3,12 +3,14 @@ $unconvertedEntity = array(
 	'&percnt;',
 	'&numsp;',
 	'&lowbar;',
+	'&ndash;',
 	'&#x2013;'
 );
 $convertedChar = array(
 	'%',
 	' ',
 	'_',
+	'-',
 	'-'
 );
 
