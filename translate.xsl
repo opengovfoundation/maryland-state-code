@@ -34,7 +34,29 @@
 				</order_by>
 				<!-- TODO: need to nest indented paragraphs -->
 				<text>
-				  <xsl:copy-of select="current()/text" />
+
+				  <xsl:if test="current()/text">
+					<section>
+					  <xsl:value-of select="current()/text" />
+					</section>
+				  </xsl:if>
+				  <xsl:if test="current()/table">
+					<section>
+						<table>
+							<xsl:for-each select="current()/table/tgroup/tbody/row">
+							    <xsl:if test="current()/entry != ''">
+									<tr>
+										<xsl:for-each select="current()/entry">
+											<td>
+												<xsl:value-of select="current()" />
+											</td>
+										</xsl:for-each>
+									</tr>
+								</xsl:if>
+							</xsl:for-each>
+						</table>
+					</section>
+				  </xsl:if>
 
 				  <!-- Begin heirarchy -->
 				  <!-- Subsection -->
