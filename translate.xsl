@@ -8,7 +8,7 @@
 		</xsl:template>	 -->
 
 	<xsl:template match="article/section">
-		<xsl:variable name="sectionNumber" select="replace(enum, '\.$', '')"/>
+		<xsl:variable name="sectionNumber" select="replace(enum, '\. *$', '')"/>
 
 		<xsl:variable name="href">
 			<xsl:choose>
